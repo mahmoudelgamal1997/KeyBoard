@@ -1,13 +1,9 @@
 package com.example2017.android.keyboard;
 
-import android.app.Service;
-import android.content.Intent;
 import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.media.AudioManager;
-import android.os.IBinder;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputConnection;
@@ -18,6 +14,9 @@ public class MyService extends InputMethodService implements KeyboardView.OnKeyb
     private KeyboardView keyboardView;
     private Keyboard keyboard;
 
+    //to change between different Keyboards (Mode_Change)
+    int FlagToModeChange =1;
+    int FlagToShift=1;
     private boolean isCaps=false;
 
 
@@ -48,26 +47,51 @@ public class MyService extends InputMethodService implements KeyboardView.OnKeyb
         InputConnection ic= getCurrentInputConnection();
         playclick(i);
         switch(i){
+                // KEYCODE_MODE_CHANGE =-2
+            case Keyboard.KEYCODE_MODE_CHANGE:
+
+                if (FlagToModeChange ==1) {
+                    keyboard = new Keyboard(this, R.xml.symbol);
+                    keyboardView.setKeyboard(keyboard);
+                    FlagToModeChange++;
+                }else{
+                    keyboard = new Keyboard(this, R.xml.qwerty);
+                    keyboardView.setKeyboard(keyboard);
+                    FlagToModeChange = 1;
+                }
+
+                break;
+
+
 
             //Action when Delete
+            // ASCII Code for KEYCODE_DELETE = -5
             case Keyboard.KEYCODE_DELETE:
                 ic.deleteSurroundingText(1,0);
-                Log.e("caps","Delete");
                 break;
 
             //Action when Done
             case Keyboard.KEYCODE_DONE:
                 ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_ENTER));
-                Log.e("caps","DONE");
 
                 break;
 
             //Action when Shift to get upper case
             case Keyboard.KEYCODE_SHIFT:
+
+                if (FlagToModeChange ==2 &&FlagToShift==1 ){
+                    keyboard = new Keyboard(this, R.xml.symbol_shift);
+                    keyboardView.setKeyboard(keyboard);
+                    FlagToShift++;
+                }else {
+                    keyboard = new Keyboard(this, R.xml.symbol);
+                    keyboardView.setKeyboard(keyboard);
+                    FlagToShift=1;
+                }
+
                 isCaps=!isCaps;
                 keyboard.setShifted(isCaps);
                 keyboardView.invalidateAllKeys();
-                Log.e("caps","SHIFT");
                 break;
 
 
@@ -78,6 +102,7 @@ public class MyService extends InputMethodService implements KeyboardView.OnKeyb
                     code = Character.toUpperCase(code);
                 }
                 ic.commitText(String.valueOf(code), 1);
+
 
 
         }
