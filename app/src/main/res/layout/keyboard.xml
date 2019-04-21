@@ -4,11 +4,11 @@
     android:layout_height="wrap_content"
     android:id="@+id/keyboard"
     android:keyTextColor="@android:color/white"
-    android:background="@drawable/key_background"
-    android:keyPreviewLayout="@layout/key_previewlayout"
-
-    >
-
-
+    android:background="@drawable/marcelo"
+    android:keyTextSize="28dp"
+    android:keyBackground="@android:color/transparent"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:keyPreviewLayout="@layout/key_previewlayout">
 
 </android.inputmethodservice.KeyboardView>

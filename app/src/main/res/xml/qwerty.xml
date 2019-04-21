@@ -3,10 +3,9 @@
 android:keyWidth="10%p"
 android:horizontalGap="4px"
 android:verticalGap="4px"
-android:keyHeight="60dp"
-android:keyTextColor="@color/colorAccent"
-android:keyBackground="@color/colorPrimaryDark"
-    >
+android:keyHeight="45dp"
+
+android:keyTextColor="@color/colorAccent">
 
     <Row>
         <Key android:keyLabel="1"
@@ -118,14 +117,19 @@ android:keyBackground="@color/colorPrimaryDark"
             android:keyLabel=","
             android:keyWidth="13%p" />
         <Key
-            android:codes="-101"
-            android:keyIcon="@drawable/sym_keyboard_language_switch"
+            android:codes="8"
+            android:keyIcon="@drawable/madrid_icon"
             android:keyWidth="10%p" />
         <Key
             android:codes="32"
             android:isRepeatable="true"
             android:keyIcon="@drawable/sym_keyboard_space"
             android:keyWidth="35%p" />
+        <Key
+            android:codes="4"
+            android:keyLabel="@string/arabic"
+            android:keyWidth="13%p" />
+
         <Key
             android:codes="46"
             android:keyLabel="."
@@ -134,6 +138,8 @@ android:keyBackground="@color/colorPrimaryDark"
             android:codes="10"
             android:keyEdgeFlags="right"
             android:keyIcon="@drawable/sym_keyboard_return"
-            android:keyWidth="17%p" />
+            android:keyWidth="17%p"
+
+            />
     </Row>
 </Keyboard>

@@ -7,5 +7,6 @@
     <color name="background">#3F51B5</color>
     <color name="divider">#303F9F</color>
     <color name="pressed">#FF4081</color>
+    <color name="button">#2196f3</color>
 
 </resources>
